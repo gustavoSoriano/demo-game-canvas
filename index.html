@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Demo game</title>
+		<style>canvas{position:absolute;top:0px;bottom: 0px;left:0px;right:0px;margin:auto;border:1px solid black;}</style>
+	</head>
+
+	<body>
+		<script src="engine.js"></script>
+		<script src="sprite.js"></script>		
+		<script src="bird.js"></script>
+		<script src="fundo.js"></script>
+
+		<script>
+			GAME.main( () => {
+				atualiza( () => {
+					fundo.atualiza()
+					bird.atualiza()
+				})
+
+				desenha( () => {
+					fundo.desenha()
+					bird.desenha()
+				})
+			})
+
+			GAME.cursor("mousedown", e => {
+				status("jogar", function(){
+					this.jogando()
+				})
+
+				status("jogando", function(){
+					bird.pula()
+				})
+
+				status("perdeu", function(){
+					this.jogar()
+				})
+			})
+			
+			GAME.key("keyup", e => {
+				if(e.code == "Space")
+				{
+					status("jogar", function(){
+						this.jogando()
+					})
+					status("jogando", function(){
+						bird.pula()
+					})
+				}
+			})
+		</script>
+	</body>
+</html>
